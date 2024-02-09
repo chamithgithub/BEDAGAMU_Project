@@ -134,7 +134,7 @@ const Welcome = ({ navigation }) => {
 
           <Button
             title="Join Now"
-            onPress={() => navigation.navigate("Signup")}
+            onPress={() => navigation.navigate("DashScreen")}
             style={{
               marginTop: 22,
               width: "100%",
