@@ -26,8 +26,8 @@ const SearchScreen = () => {
     navigation.navigate("ImageDetect"); // Replace "ImageDetect" with the actual name of your ImageDetect screen
   }
 
-  function onTxtChange(v) {
-    setTextValue(v);
+  function onTxtChange() {
+    console.log("heoooo");
   }
 
   return (
@@ -42,20 +42,13 @@ const SearchScreen = () => {
       </View>
       <Text style={styles.title}>Features</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("ImageDetect")}
-        >
-          <Text style={styles.buttonText}>Button 1</Text>
+        <TouchableOpacity style={styles.button} onPress={navigateToImageDetect}>
+          <Text style={styles.buttonText}>Fruit Recognition</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Button 2</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Button 3</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Button 4</Text>
+          <Text style={styles.buttonText} onPress={onTxtChange}>
+            Fruit Price Predictor
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
