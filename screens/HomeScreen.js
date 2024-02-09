@@ -21,12 +21,12 @@ const HomeScreen = () => {
       {
         id: 1,
         foodImage: "https://via.placeholder.com/150",
-        foodName: "Sample Food",
-        location: "Sample Location",
-        description: "Sample Description",
-        contact: "Sample Contact",
+        foodName: "Mango Food",
+        location: "Kalutara",
+        description: "fresh and good(5kg)",
+        contact: "075 3257889",
         isFree: true,
-        amount: "0",
+        amount: "100",
       },
     ]);
   }, []);
