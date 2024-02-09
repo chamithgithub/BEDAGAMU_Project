@@ -49,6 +49,40 @@ const Signup = ({ navigation }) => {
               marginVertical: 8,
             }}
           >
+            User Name
+          </Text>
+
+          <View
+            style={{
+              width: "100%",
+              height: 48,
+              borderColor: COLORS.black,
+              borderWidth: 1,
+              borderRadius: 8,
+              alignItems: "center",
+              justifyContent: "center",
+              paddingLeft: 22,
+            }}
+          >
+            <TextInput
+              placeholder="Enter your User Name"
+              placeholderTextColor={COLORS.black}
+              keyboardType="user-name"
+              style={{
+                width: "100%",
+              }}
+            />
+          </View>
+        </View>
+
+        <View style={{ marginBottom: 12 }}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: 400,
+              marginVertical: 8,
+            }}
+          >
             Email address
           </Text>
 
@@ -183,7 +217,7 @@ const Signup = ({ navigation }) => {
             color={isChecked ? COLORS.primary : undefined}
           />
 
-          <Text>I aggree to the terms and conditions</Text>
+          <Text>I agree to the terms and conditions</Text>
         </View>
 
         <Button
