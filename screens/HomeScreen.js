@@ -6,9 +6,14 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  Image,
 } from "react-native";
+
 // Import the previously created form component
 import AddItemScreen from "./AddItemScreen";
+
+// Import the local image
+import foodImageLocal from "../assets/mango.jpg";
 
 const HomeScreen = () => {
   const routeData = useRoute();
@@ -20,7 +25,7 @@ const HomeScreen = () => {
     setFoods([
       {
         id: 1,
-        foodImage: "https://via.placeholder.com/150",
+        foodImage: foodImageLocal, // Use the imported local image
         foodName: "Mango Food",
         location: "Kalutara",
         description: "fresh and good(5kg)",
@@ -50,6 +55,10 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.foodCard}>
+            <Image
+              source={item.foodImage} // Use the local image directly
+              style={styles.foodImage}
+            />
             <Text style={styles.foodName}>{item.foodName}</Text>
             <Text>{item.location}</Text>
             <Text>{item.description}</Text>
@@ -77,6 +86,14 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#F0F0F0",
   },
+  foodImage: {
+    width: "50%",
+    height: 200, // Adjust height as per your design
+    resizeMode: "cover", // or 'contain' or 'stretch' as per your design
+    marginBottom: 8,
+    borderRadius: 8,
+  },
+
   title: {
     fontSize: 20,
     fontWeight: "bold",

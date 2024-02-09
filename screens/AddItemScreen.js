@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ImagePicker from "react-native-image-picker";
+import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -73,15 +73,12 @@ const AddItemScreen = () => {
       setImage(result.assets[0].uri);
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Food Image:</Text>
       <TouchableOpacity onPress={pickImage}>
-        <Image
-          key={foodImage}
-          style={styles.image}
-          source={{ uri: foodImage || "https://via.placeholder.com/150" }}
-        />
+      <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       </TouchableOpacity>
 
       <Text style={styles.label}>Food Name:</Text>
