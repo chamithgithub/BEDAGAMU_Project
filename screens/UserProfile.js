@@ -53,7 +53,8 @@ const UserProfile = () => {
     <View style={styles.container}>
       <View style={styles.imagePickerContainer}>
         {image && <Image source={{ uri: image }} style={styles.pickedImage} />}
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
+        <Text></Text>
+        <Button title="Add Image" onPress={pickImage} />
       </View>
       <View style={styles.profileContainer}>
         <Image

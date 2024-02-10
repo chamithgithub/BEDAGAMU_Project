@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, Platform,Text, StyleSheet } from "react-native";
+import { Button, Image, View, Platform, Text, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import axios from "axios";
 
 export default function ImageDetect() {
   const [image, setImage] = useState(null);
+  const [objects, setObjects] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -42,14 +44,55 @@ export default function ImageDetect() {
     }
   };
 
+  const uploadImage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", {
+        uri: image,
+        name: "image.jpg",
+        type: "image/jpeg", // adjust the image type if necessary
+      });
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/uploadfile/",
+        formData,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (!response.data) {
+        throw new Error("Failed to upload image");
+      }
+
+      setObjects(response.data.objects);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {image && <Image source={{ uri: image }} style={styles.image} />}
       <View style={styles.buttonContainer}>
         <Button title="Pick from Gallery" onPress={pickImageFromGallery} />
-        <Text></Text>
+        <Text style={styles.orText}>-- OR --</Text>
         <Button title="Take a Photo" onPress={pickImageFromCamera} />
       </View>
+      {image && <Button title="Upload Image" onPress={uploadImage} />}
+      {objects.length > 0 && (
+        <View style={styles.objectsContainer}>
+          <Text>Detected Objects:</Text>
+          {objects.map((object, index) => (
+            <Text key={index}>
+              {object[0]} - Confidence: {object[1]}
+            </Text>
+          ))}
+        </View>
+      )}
     </View>
   );
 }
@@ -63,14 +106,22 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "column",
-    marginVertical: 10, // Adjust the vertical margin
+    marginVertical: 10,
     padding: 20,
     justifyContent: "space-around",
+  },
+  orText: {
+    alignSelf: "center",
+    marginVertical: 10,
   },
   image: {
     width: 300,
     height: 300,
     borderRadius: 10,
     marginBottom: 20,
+  },
+  objectsContainer: {
+    marginTop: 20,
+    alignItems: "center",
   },
 });
